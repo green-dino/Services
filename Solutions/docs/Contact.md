@@ -42,7 +42,7 @@ All fields are required
             const subject = encodeURIComponent(`Information Request from ${name}`);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone Number: ${phone}\n\nMessage:\n${message}`);
             
-            const mailtoLink = `mailto:rye@grcand.me?subject=${subject}&body=${body}`;
+            const mailtoLink = `mailto:info@grcand.me?subject=${subject}&body=${body}`;
             window.location.href = mailtoLink;
             
             setTimeout(() => {
