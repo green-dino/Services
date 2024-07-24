@@ -17,7 +17,7 @@ Our Workspaces engine enables customized applications across various industries,
 Let's explore how collaboration at scale can transform your
 business.
 
-[Resources](Resources/Resources.md) Our cloud-based remote workspace solution provides secure and customizable work environments that can be accessed from any device, from any location.
+Our cloud-based remote workspace solution provides secure and customizable work environments that can be accessed from any device, from any location.
 
 Our [Solutions](Solutions.md) are tailored to meet the unique needs of our clients,
 whether they require advanced security features, streamlined deployment
