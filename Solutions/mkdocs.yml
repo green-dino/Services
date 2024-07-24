@@ -1,1 +1,34 @@
 site_name: WENT Cloud
+site_description: This site provides essential security information and best practices to protect our business data and systems.
+site_author: WENT, LLC
+
+theme: 
+  name: material
+  language: en
+
+  palette:
+    primary: 'royal purple'
+    accent: 'orange'
+
+  features:
+    - navigation.expand
+    - navigation.tabs
+    - search.highlight
+    - search.suggest
+
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - footnotes
+  - pymdownx.superfences
+
+
+extra:
+  social_links: &social_links
+    - icon: fontawesome/brands/linkedin
+      link: http://linkedin.com/in/john-r-whalen/
+
+

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Exploring Attack Patterns: - WENT Cloud</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">WENT Cloud</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Welcome to WENT</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Contact/" class="nav-link">Contact Us</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../OpenSource/" class="nav-link">Open Source Data Tools</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Solutions/" class="nav-link">Solutions</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../Support/" class="nav-link">Support</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Exploring Attack Patterns:</a>
+</li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">Security</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../Security/Aug24/" class="dropdown-item">Aug 24 Security Notice</a>
+</li>
+            
+<li>
+    <a href="../Security/Intro/" class="dropdown-item">Security Notice</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../Support/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../Security/Aug24/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#exploring-attack-patterns" class="nav-link">Exploring Attack Patterns:</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#exploiting-software-weaknesses-beyond-expectations" class="nav-link">Exploiting Software Weaknesses Beyond Expectations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#key-questions-for-understanding-the-technology" class="nav-link">Key Questions for Understanding the Technology</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#introduction" class="nav-link">Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#the-need-for-testing-beyond-expected-behavior" class="nav-link">The need for testing beyond expected behavior</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#organizing-attack-patterns-by-mechanisms" class="nav-link">Organizing Attack Patterns by Mechanisms</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#identifying-and-mapping-the-attack-surface" class="nav-link">Identifying and Mapping the Attack Surface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#identifying-weaknesses-in-software" class="nav-link">Identifying Weaknesses in Software</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#benefits-of-cwes-common-weakness-enumerations" class="nav-link">Benefits of CWEs (Common Weakness Enumerations)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#thinking-like-an-attacker" class="nav-link">Thinking Like an Attacker</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#conclusion" class="nav-link">Conclusion</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#security" class="nav-link">Security</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#tools" class="nav-link">Tools</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="exploring-attack-patterns">Exploring Attack Patterns:</h1>
+<h2 id="exploiting-software-weaknesses-beyond-expectations">Exploiting Software Weaknesses Beyond Expectations</h2>
+<p>Quality Assurance efforts usually focus on testing that the feature works as expected. In the security world, we examine the software functions in ways never imagined to give us more access to resources and data.</p>
+<h2 id="key-questions-for-understanding-the-technology">Key Questions for Understanding the Technology</h2>
+<p>To understand a technology or system, consider the following key questions:</p>
+<ol>
+<li><strong>How does the technology work?</strong></li>
+<li><strong>What are the data inputs?</strong></li>
+<li><strong>What are the data outputs?</strong></li>
+<li><strong>When does the analysis occur?</strong></li>
+<li><strong>What are the analytical algorithms?</strong></li>
+<li><strong>How does it operate at scale?</strong></li>
+<li><strong>How can it be circumvented?</strong></li>
+<li><strong>How do humans interact with the technology?</strong></li>
+<li><strong>What are the user's responsibilities?</strong></li>
+<li><strong>How does this interaction scale?</strong></li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<p>Malicious actors care deeply about their work and they do not want to be disrupted while doing it, hence why they spend time working on supply side attacks and doing what they do best avoiding detection. This article will help you counter their efforts and make their jobs more difficult. </p>
+<p>Think about something concrete, a house, car, building. Now think about how a malicious actor might try to get in to that. A house has windows, vents, doors while a car has doors and windows. </p>
+<p>Think about the systems in a house, HVAC, Power, Appliances and a car has similar systems but slightly different a motor or engine, transmission, drive-train and entertainment features. </p>
+<p>Now think about the abstract, a computer here, there, locally or remote has ports, protocols and procedures. These ports, protocols and procedures offer services that we have learned to rely on in our lives.</p>
+<p>Lets extend that thinking pattern you just explored to some new concepts. <strong>Attack Surface Analysis</strong></p>
+<h3 id="attack-surface-analysis-helps-you-to">Attack Surface Analysis helps you to:</h3>
+<pre><code>-Identify what functions and what parts of the system you need to review/test for security vulnerabilities
+
+-Identify high risk areas of code that require defense-in-depth protection - what parts of the system that you need to defend
+
+-Identify when you have changed the attack surface and need to do some kind of threat assessment
+</code></pre>
+<h1 id="the-need-for-testing-beyond-expected-behavior">The need for testing beyond expected behavior</h1>
+<p>The Attack Surface of an application comprises four key components:</p>
+<ol>
+<li><strong>Paths for Data/Commands:</strong></li>
+<li>The sum of all entry and exit points for data and commands in the application.</li>
+<li>
+<p>Includes resource connection, authentication, authorization, activity logging, data validation, and encoding.</p>
+</li>
+<li>
+<p><strong>Protection Code for Paths:</strong></p>
+</li>
+<li>The code responsible for safeguarding the paths mentioned above.</li>
+<li>
+<p>Encompasses measures like resource connection security, access control, and data validation.</p>
+</li>
+<li>
+<p><strong>Valuable Data:</strong></p>
+</li>
+<li>
+<p>All valuable data utilized in the application, such as secrets, keys, intellectual property, critical business data, personal data, and PII (Personally Identifiable Information).</p>
+</li>
+<li>
+<p><strong>Protection Code for Data:</strong></p>
+</li>
+<li>The code responsible for protecting the valuable data.</li>
+<li>Includes encryption, checksums, access auditing, data integrity, and operational security controls.</li>
+</ol>
+<h2 id="organizing-attack-patterns-by-mechanisms">Organizing Attack Patterns by Mechanisms</h2>
+<p>Here we review attack patterns hierarchically based on common techniques used when exploiting vulnerabilities. These categories represent the various methods employed to attack a system. It's important to note that they don't reflect the consequences or objectives of the attacks.</p>
+<p><strong>Overlap Potential:</strong>
+Some attack patterns may align with more than one category depending on one's perspective. To mitigate this, each attack pattern within a category is presented with a technique that is consistently applicable, without exceptions.</p>
+<h3 id="types-of-attack-patterns">Types of attack patterns</h3>
+<ol>
+<li><strong>Engage in Deceptive Interactions</strong></li>
+<li><strong>Abuse Existing Functionality</strong></li>
+<li><strong>Manipulate Data Structures</strong></li>
+<li><strong>Manipulate System Resources</strong></li>
+<li><strong>Inject Unexpected Items</strong></li>
+<li><strong>Employ Probabilistic Techniques</strong></li>
+<li><strong>Manipulate Timing and State</strong></li>
+<li><strong>Collect and Analyze Information</strong></li>
+<li><strong>Subvert Access Control</strong></li>
+</ol>
+<p>To enhance security, you can overlay this model with various types of users, including their roles and privilege levels when accessing the system. The complexity of your analysis increases with the number of different user types, but it's crucial to focus primarily on two extremes: unauthenticated, anonymous users, and highly privileged admin users (e.g., database administrators and system administrators).</p>
+<p>Here's a structured approach to this analysis:</p>
+<ol>
+<li><strong>User Types and Attack Points:</strong></li>
+<li>Group each type of user based on their roles, privilege levels, and the points within the system they can access, whether authorized or not.</li>
+<li>
+<p>Differentiate between unauthenticated, anonymous users and highly privileged admin users.</p>
+</li>
+<li>
+<p><strong>Attack Point Categories:</strong></p>
+</li>
+<li>
+<p>Categorize attack points into buckets based on factors such as:</p>
+<ul>
+<li>Risk (external-facing or internal-facing)</li>
+<li>Purpose of the attack</li>
+<li>Implementation details</li>
+<li>Design considerations</li>
+<li>Technology used</li>
+</ul>
+</li>
+<li>
+<p><strong>Count and Prioritize:</strong></p>
+</li>
+<li>Count the number of attack points in each category.</li>
+<li>
+<p>Select representative cases for each attack point category.</p>
+</li>
+<li>
+<p><strong>Focused Review/Assessment:</strong></p>
+</li>
+<li>
+<p>Concentrate your security review or assessment on these selected representative cases.</p>
+</li>
+<li>
+<p>The goal of identifying and understanding attack patterns</p>
+</li>
+</ol>
+<h2 id="identifying-and-mapping-the-attack-surface">Identifying and Mapping the Attack Surface</h2>
+<p>When identifying and mapping the Attack Surface, consider the following steps:</p>
+<ol>
+<li><strong>Building a Baseline Description:</strong></li>
+<li>Create a comprehensive picture and take notes about the Attack Surface.</li>
+<li>
+<p>Spend a few hours reviewing design and architecture documents from an attacker's perspective.</p>
+</li>
+<li>
+<p><strong>Identifying Points of Entry/Exit:</strong></p>
+</li>
+<li>Review the source code to identify various points of entry and exit.</li>
+<li>
+<p>These can include:</p>
+<ul>
+<li>User interface (UI) forms and fields</li>
+<li>HTTP headers and cookies</li>
+<li>APIs</li>
+<li>Files</li>
+<li>Databases</li>
+<li>Other local storage</li>
+<li>Email or other messaging systems</li>
+<li>Runtime arguments</li>
+<li>And any other specific entry/exit points relevant to your system.</li>
+</ul>
+</li>
+<li>
+<p><strong>Managing Numerous Attack Points:</strong></p>
+</li>
+<li>Recognize that the total number of different attack points can be significant, potentially reaching into the thousands.</li>
+<li>
+<p>To make this manageable, categorize them into different types based on function, design, and technology.</p>
+</li>
+<li>
+<p><strong>Categorized Attack Points:</strong></p>
+</li>
+<li>Organize your attack points into types that reflect their respective functions, design aspects, and technology.</li>
+<li>Consider categories such as:<ul>
+<li>Login/authentication entry points</li>
+<li>Admin interfaces</li>
+<li>Inquiries and search functions</li>
+<li>Data entry (CRUD) forms</li>
+<li>Business workflows</li>
+<li>Transactional interfaces/APIs</li>
+<li>Operational command and monitoring interfaces/APIs</li>
+<li>Interfaces with other applications/systems</li>
+<li>And any other relevant types specific to your system.</li>
+</ul>
+</li>
+</ol>
+<h2 id="identifying-weaknesses-in-software">Identifying Weaknesses in Software</h2>
+<p>Common software vulnerabilities (e.g., SQL injection, XSS, buffer overflows)
+Use the <a href="https://cwe.mitre.org">CWE</a> to find common weaknesses 
+This can identify interesting trends in real-world, exploitable weaknesses that can inform security policy and investment decision-making. To observe both upward and downward trends in CWE ranks. </p>
+<h2 id="benefits-of-cwes-common-weakness-enumerations">Benefits of CWEs (Common Weakness Enumerations)</h2>
+<p>CWEs offer several valuable benefits:</p>
+<ol>
+<li><strong>Demonstrative Examples:</strong></li>
+<li>
+<p>CWEs provide demonstrative examples, often including sample attack payloads that serve as a starting point for crafting our own exploits.</p>
+</li>
+<li>
+<p><strong>Links to Observed Examples:</strong></p>
+</li>
+<li>
+<p>They also link to observed examples, which are instances found in real production software. These are typically connected to CVEs (Common Vulnerabilities and Exposures).</p>
+</li>
+<li>
+<p><strong>Links to Attack Patterns:</strong></p>
+</li>
+<li>One of the most valuable aspects is that CWEs link to related attack patterns. These attack patterns are part of a knowledge base called <a href="https://capec.mitre.org">CAPEC</a> (Common Attack Pattern Enumeration and Classification). CAPEC helps identify and understand common attack patterns used by malicious actors.</li>
+</ol>
+<p>Three specific weaknesses in software security have shown a consistent upward trend in ranking, and software developers and maintainers should prioritize addressing them:</p>
+<ol>
+<li><strong>CWE-862: Missing Authorization</strong></li>
+<li>In 2019, it was ranked 36th.</li>
+<li>Entered the CWE Top 25 in 2020, ranked 25th, and has consistently moved up.</li>
+<li>
+<p>In 2023, it's ranked 11th, indicating a need for more diligent implementation of authorization techniques.</p>
+</li>
+<li>
+<p><strong>CWE-918: Server-Side Request Forgery (SSRF)</strong></p>
+</li>
+<li>In 2019, it was ranked 32nd.</li>
+<li>Entered the CWE Top 25 in 2021, ranked 24th, and has steadily climbed.</li>
+<li>
+<p>In 2023, it's ranked 19th, showing a consistent upward trend.</p>
+</li>
+<li>
+<p><strong>CWE-639: Authorization Bypass Through User-Controlled Key</strong></p>
+</li>
+<li>In 2019, it was ranked outside the top 40.</li>
+<li>Steadily climbed in rank over the years, reaching 38th in 2023.</li>
+<li>This upward trend is worth monitoring for further movement and improvements in security.</li>
+</ol>
+<p>These weaknesses highlight areas where security measures should be prioritized, and developers should pay attention to implementing safeguards against them.</p>
+<h2 id="thinking-like-an-attacker">Thinking Like an Attacker</h2>
+<p>Attackers are thinking about how to avoid detection, heres a common approach to how an attacker conducts footprinting and builds resources to complete their work. </p>
+<h3 id="fingerprinting-of-the-operating-system">Fingerprinting of the Operating System</h3>
+<ul>
+<li><strong>Objective:</strong> To determine the underlying OS for proper path traversal.</li>
+<li><strong>Techniques:</strong></li>
+<li>Port Mapping: Identifying listening ports and protocol types.</li>
+<li>TCP/IP Fingerprinting: Observing OS-specific responses.</li>
+<li>Inducing Errors: Generating errors for informative messages.</li>
+<li>Surveying the Application: Identifying user input areas for specifying file names or paths.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Port Mapping</td>
+<td>Identify listening ports and protocol types.</td>
+</tr>
+<tr>
+<td>TCP/IP Fingerprinting</td>
+<td>Observe OS-specific responses for OS guessing.</td>
+</tr>
+<tr>
+<td>Inducing Errors</td>
+<td>Generate errors to find informative messages.</td>
+</tr>
+<tr>
+<td>Surveying the App</td>
+<td>Identify user input areas for file paths.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="experimentation-with-input-parameters">Experimentation with Input Parameters</h3>
+<ul>
+<li><strong>Objective:</strong> Observe system responses to variations in input parameters.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access Common Files</td>
+<td>Access common files in root directories.</td>
+</tr>
+<tr>
+<td>Access Drive Letters</td>
+<td>Access specific drive or volume letters.</td>
+</tr>
+<tr>
+<td>Access UNC Shares</td>
+<td>Access known Windows UNC shares.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exploiting-vulnerabilities">Exploiting Vulnerabilities</h3>
+<ul>
+<li><strong>Objective:</strong> Inject path traversal syntax to access, modify, or execute arbitrary files.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manipulate File Paths</td>
+<td>Manipulate file paths through absolute sequences.</td>
+</tr>
+<tr>
+<td>Download/Modify/Execute</td>
+<td>Download, modify, or attempt to execute files.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusion">Conclusion</h2>
+<p>When it comes to security testing, even if you've thoroughly covered all the basics like examining Common Weakness Enumerations (CWEs) related to Broken Access Control and tracking down common attack patterns, you can't claim absolute freedom from vulnerabilities. You can't guarantee the software's security with certainty.</p>
+<p>And that's perfectly fine.</p>
+<p>There might still be business logic bugs that slipped through the cracks. There could be untested input patterns or unknown tainted payloads that could potentially exploit weaknesses. As you gain more experience, your testing methodology will improve, and you'll likely discover and address these issues over time.</p>
+<p>The process doesn't end there, though. You'll need to apply the same scrutiny to the other nine items in the Top 10 list. By doing so, you'll establish a solid foundation for protecting against common risks and using real-world attack patterns. It's an ongoing journey towards a more secure software environment.</p>
+<h1 id="security">Security</h1>
+<p><a href="../Security/Intro/">Security</a></p>
+<h1 id="tools">Tools</h1>
+<p><a href="https://owasp.org/www-community/Free_for_Open_Source_Application_Security_Tools">OWASP</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/jquery-3.6.0.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
