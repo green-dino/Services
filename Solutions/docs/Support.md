@@ -31,3 +31,4 @@ This package includes the identification of potential areas for security or perf
 This package includes an upgrade of your existing Workspaces deployment within your infrastructure (On-premise or Cloud Provider). Our solutions engineer will use our deployment automation to upgrade your Workspaces deployment to the latest version, resulting in a more secure and feature-rich platform.
 
 **Outcome:** A seamless upgrade to the latest version of Workspaces within your existing infrastructure.
+

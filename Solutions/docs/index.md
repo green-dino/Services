@@ -19,7 +19,11 @@ business.
 
 [Resources](Resources.md) Our cloud-based remote workspace solution provides secure and customizable work environments that can be accessed from any device, from any location.
 
-[Solutions](Solutions.md)
+Our [Solutions](Solutions.md) are tailored to meet the unique needs of our clients,
+whether they require advanced security features, streamlined deployment
+options, or customized software configurations. Our team of experts works
+closely with each client to understand their requirements and provide a
+solution that meets their specific needs.
 
-[Support](Support.md)
+Our [Support](Support.md) services are delivered by a team of experienced solutions architects and engineers who are passionate about helping our clients succeed. They work closely with each client to understand their requirements and provide tailored solutions that meet their unique needs, ensuring that they achieve success along their Workspaces journey.
 
