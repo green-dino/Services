@@ -1,0 +1,1032 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="This site provides essential security information and best practices to protect our business data and systems.">
+      
+      
+        <meta name="author" content="WENT, LLC">
+      
+      
+      
+        <link rel="prev" href="../../Support/">
+      
+      
+        <link rel="next" href="../Resources/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.6">
+    
+    
+      
+        <title>Threat Assessment and PowerShell - WENT Cloud</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="royal-purple" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#threat-assessment-and-powershell" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="WENT Cloud" class="md-header__button md-logo" aria-label="WENT Cloud" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            WENT Cloud
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Threat Assessment and PowerShell
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Welcome to WENT
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Contact/" class="md-tabs__link">
+        
+  
+    
+  
+  Contact Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../OpenSource/" class="md-tabs__link">
+        
+  
+    
+  
+  Open Source Data Tools
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Solutions/" class="md-tabs__link">
+        
+  
+    
+  
+  Solutions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Support/" class="md-tabs__link">
+        
+  
+    
+  
+  Support
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  Resources
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="WENT Cloud" class="md-nav__button md-logo" aria-label="WENT Cloud" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    WENT Cloud
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to WENT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact Us
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OpenSource/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Open Source Data Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Solutions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Support/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Support
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Resources
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Threat Assessment and PowerShell
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Threat Assessment and PowerShell
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powershell-and-its-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      PowerShell and Its Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyber-threat-actors-ctas-and-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyber Threat Actors (CTAs) and PowerShell
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exploring Attack Patterns:
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Security
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            Security
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Security/Aug24/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aug 24 Security Notice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Security/Intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Notice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#powershell-and-its-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      PowerShell and Its Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyber-threat-actors-ctas-and-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyber Threat Actors (CTAs) and PowerShell
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="threat-assessment-and-powershell">Threat Assessment and PowerShell<a class="headerlink" href="#threat-assessment-and-powershell" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>In a structured approach to threat assessments, defenders turn to multiple reliable sources to provide prioritized best practices for defending against the top five most common attacks observed across the community. Additionally, they focus on threats posed by Cyber Threat Actors (CTAs) who utilize Living off the Land (LotL) attacks.</p>
+<h2 id="powershell-and-its-benefits">PowerShell and Its Benefits<a class="headerlink" href="#powershell-and-its-benefits" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Automation:</strong> Administrators can automate tasks using PowerShell cmdlets, reducing the need for manual configurations, especially for tedious tasks.</p>
+</li>
+<li>
+<p><strong>Shortcuts:</strong> PowerShell allows administrators to work around software constraints. For example, IT administrators can push out configuration settings, like password policies, to all systems across a network.</p>
+</li>
+<li>
+<p><strong>Scalability:</strong> IT administrators can efficiently collect information from enterprise assets, even in larger enterprises, through automation. PowerShell remoting enables scripts designed for scale, reaching a large group of systems for tasks like installing updates and configuration settings.</p>
+</li>
+<li>
+<p><strong>Visibility:</strong> PowerShell provides visibility into various system files and data through the command-line, making it easier for data collection and analysis.</p>
+</li>
+</ul>
+<h2 id="cyber-threat-actors-ctas-and-powershell">Cyber Threat Actors (CTAs) and PowerShell<a class="headerlink" href="#cyber-threat-actors-ctas-and-powershell" title="Permanent link">&para;</a></h2>
+<p>CTAs leverage PowerShell for several reasons:</p>
+<ul>
+<li>
+<p><strong>Evading Defenses:</strong> PowerShell is a native Windows tool functional on other platforms like Linux and macOS. CTAs use it without raising red flags, as it is also used by IT professionals. They can even employ PowerShell to disable critical threat detection tools like anti-malware applications.</p>
+</li>
+<li>
+<p><strong>Automation:</strong> CTAs use the Windows Application Programming Interface (API) to automate tasks and evade detection.</p>
+</li>
+<li>
+<p><strong>Access to Modules:</strong> CTAs can access widely available PowerShell modules on open source platforms, allowing them to modify PowerShell for malicious purposes.</p>
+</li>
+<li>
+<p><strong>Malware Development:</strong> CTAs can write malware in PowerShell. Examples include Netwalker, RogueRobin, PowerWare, and POWELIK.</p>
+</li>
+<li>
+<p><strong>Post-Exploitation:</strong> CTAs use post-exploitation frameworks (e.g., CobaltStrike, PowerSploit, PowerShell Empire, Mimikatz), which leverage PowerShell components, to compromise a network and steal credentials.</p>
+</li>
+<li>
+<p><strong>Social Engineering:</strong> CTAs can use social engineering to send a macro-enabled document, subsequently launching PowerShell.</p>
+</li>
+<li>
+<p><strong>Payload Encoding:</strong> CTAs can encode payloads using the command-line and load PowerShell into other processes.</p>
+</li>
+<li>
+<p><strong>Script Bypass:</strong> CTAs can use scripts, such as WScript and CScript, to bypass script-based constraints on operating systems.</p>
+</li>
+<li>
+<p><strong>Attack Surface Expansion:</strong> CTAs can increase their attack surface by using other applications, such as the WMI command-line, to run scripts.</p>
+</li>
+</ul>
+<h1 id="securing-powershell-best-practices">Securing PowerShell Best Practices<a class="headerlink" href="#securing-powershell-best-practices" title="Permanent link">&para;</a></h1>
+<h2 id="general-recommendations">General Recommendations<a class="headerlink" href="#general-recommendations" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Establish Baseline Activity</strong>: Begin by setting up a baseline of PowerShell activity. This is crucial, especially for monitoring devices, to differentiate normal from abnormal behavior.</p>
+</li>
+<li>
+<p><strong>Disable Unnecessary Components</strong>: Disable any PowerShell components that are not required. If there's no business need, remove access to them.</p>
+</li>
+<li>
+<p><strong>Limit Execution Location</strong>: Consider applications that can restrict PowerShell scripts to run only from specific locations or paths. This reduces the attack surface.</p>
+</li>
+<li>
+<p><strong>Restrict Activities</strong>: Configure PowerShell to block activities commonly used by Cyber Threat Actors (CTAs), such as executing commands on remote systems or downloading content from the internet.</p>
+</li>
+<li>
+<p><strong>Configuration Flexibility</strong>: Depending on the application and enterprise needs, establish configurations at different levels (user-level, application-level, command-level, etc.) to implement these controls.</p>
+</li>
+<li>
+<p><strong>Script Signing</strong>: Implement script signing as a best practice. Ensure scripts are signed by trusted publishers for added security.</p>
+</li>
+<li>
+<p><strong>Protecting Sensitive Information</strong>: Refrain from storing sensitive information, like credentials, in PowerShell scripts. If credentials are necessary, deploy controls to protect them effectively.</p>
+</li>
+</ol>
+<h2 id="windows-specific-configurations">Windows-Specific Configurations<a class="headerlink" href="#windows-specific-configurations" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Group Policy Setting</strong>: Utilize the 'Turn on Script Execution' Group Policy setting in Windows to control script execution on systems.</p>
+</li>
+<li>
+<p><strong>PowerShell Execution Policies</strong>: Understand the seven PowerShell execution policies, such as AllSigned, Bypass, Default, RemoteSigned, Restricted, Undefined, and Unrestricted.</p>
+</li>
+<li>
+<p><strong>Execution Policy on Windows Servers</strong>: Change the default policy on Windows servers from RemoteSigned to AllSigned, requiring all scripts to be signed by trusted publishers.</p>
+</li>
+<li>
+<p><strong>Execution Policy on Windows Clients</strong>: Note that Restricted is the default policy on Windows clients, preventing the execution of scripts. Users can still run commands.</p>
+</li>
+<li>
+<p><strong>Execution Policy Configuration</strong>: Recognize that the Execution Policy configuration reduces the risk of unintentional violations but may not prevent direct script execution via the command-line.</p>
+</li>
+<li>
+<p><strong>Forensic Investigation</strong>: In the event of policy bypass, review the Windows Registry Key, 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell\ Value: ExecutionPolicy,' to identify the last modified timestamp for forensic purposes.</p>
+</li>
+<li>
+<p><strong>Last Write Time Analysis</strong>: Export the Registry Key to a text file to display the Last Write Time.</p>
+</li>
+</ol>
+<p>These best practices aim to enhance the security of PowerShell usage while providing flexibility to adapt to enterprise requirements and configurations.</p>
+<h1 id="powershell-customization-and-automation">PowerShell Customization and Automation<a class="headerlink" href="#powershell-customization-and-automation" title="Permanent link">&para;</a></h1>
+<h2 id="powershell-profiles">PowerShell Profiles<a class="headerlink" href="#powershell-profiles" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Profile Customization</strong>: Administrators can use PowerShell profiles to customize and automate activities when PowerShell starts. Profiles can be tailored to specific events or applications.</p>
+</li>
+<li>
+<p><strong>Security Concerns</strong>: PowerShell profiles can be manipulated by malicious actors for malicious actions, including establishing persistence mechanisms. Secure profiles by preventing changes and limiting modifications to a restricted group of administrators.</p>
+</li>
+<li>
+<p><strong>Execution Policy Control</strong>: Profiles can be controlled within the PowerShell Execution Policy, where scripts and configuration files (including profiles) can be prevented from running under the Restricted setting.</p>
+</li>
+<li>
+<p><strong>Policy Considerations</strong>: Carefully set policies to balance PowerShell access based on business needs.</p>
+</li>
+</ol>
+<h2 id="script-review-and-approval">Script Review and Approval<a class="headerlink" href="#script-review-and-approval" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Configuration Manager</strong>: Utilize Configuration Manager, now part of Microsoft Endpoint Manager, to review and approve scripts. It enforces separation of duties by separating script authors from approvers.</p>
+</li>
+<li>
+<p><strong>Script Review Tools</strong>: Implement script-checking tools like PSScriptAnalyzer to perform script reviews and detect potentially malicious behavior.</p>
+</li>
+</ol>
+<h2 id="powershell-parameters">PowerShell Parameters<a class="headerlink" href="#powershell-parameters" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Secure Usage</strong>: Secure PowerShell parameters by allowing only pre-defined parameters and using regular expressions to define permitted characters upfront.</p>
+</li>
+<li>
+<p><strong>Injection Detection</strong>: Employ PowerShell module InjectionHunter to detect malicious code that could lead to injection attacks.</p>
+</li>
+<li>
+<p><strong>Syntax Checking</strong>: Use tools in Microsoft Visual Studio to check PowerShell syntax.</p>
+</li>
+</ol>
+<h2 id="powershell-language-modes">PowerShell Language Modes<a class="headerlink" href="#powershell-language-modes" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>ConstrainedLanguage Mode</strong>: Enable ConstrainedLanguage Mode to restrict data types in PowerShell, limiting access to .COM objects and system APIs.</p>
+</li>
+<li>
+<p><strong>Enhanced Security</strong>: Use ConstrainedLanguage Mode in conjunction with application control solutions like Device Guard or AppLocker for stronger defense. This makes it more resistant to PowerShell attacks but may impact daily operations.</p>
+</li>
+</ol>
+<h2 id="powershell-remoting-winrm">PowerShell Remoting (WinRM)<a class="headerlink" href="#powershell-remoting-winrm" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>PowerShell Remoting</strong>: PowerShell can be used remotely through PowerShell remoting and the Windows Remote Management (WinRM) protocol.</p>
+</li>
+<li>
+<p><strong>Access Restriction</strong>: Restrict or disable access to WinRM if not needed to enhance security.</p>
+</li>
+</ol>
+<p>These action items are essential for securing PowerShell and ensuring its responsible usage while minimizing potential risks.</p>
+<h1 id="powershell-logging-and-event-log-configuration">PowerShell Logging and Event Log Configuration<a class="headerlink" href="#powershell-logging-and-event-log-configuration" title="Permanent link">&para;</a></h1>
+<h2 id="powershell-script-block-logging-and-protected-event-logging">PowerShell Script Block Logging and Protected Event Logging<a class="headerlink" href="#powershell-script-block-logging-and-protected-event-logging" title="Permanent link">&para;</a></h2>
+<h3 id="recommended">Recommended:<a class="headerlink" href="#recommended" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Enable Script Block Logging</strong>: Implement Script Block logging to record PowerShell activities, including script execution.</p>
+</li>
+<li>
+<p><strong>Enable Protected Event Logging</strong>: Consider enabling Protected event logging to encrypt local logs, preventing the exposure of sensitive information, like credentials within scripts.</p>
+</li>
+<li>
+<p><strong>Secure Log Storage</strong>: Store encrypted logs in a secure environment, such as a Security Information and Event Management (SIEM) system or centralized logging platform for later decryption.</p>
+</li>
+</ol>
+<h3 id="important-note">Important Note:<a class="headerlink" href="#important-note" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Protected event logging requires Script Block logging to be enabled. These two configurations work together to enhance PowerShell log security.</li>
+</ul>
+<h2 id="module-logging-configuration">Module Logging Configuration<a class="headerlink" href="#module-logging-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="recommended_1">Recommended:<a class="headerlink" href="#recommended_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Configure Module Logging</strong>: Use Group Policy Objects (GPOs) to configure Module logging for specific modules (e.g., Microsoft.PowerShell.<em>, Microsoft.WSMan.Management) or capture all modules using the wildcard symbol (</em>).</p>
+</li>
+<li>
+<p><strong>Monitor Custom Modules</strong>: Utilize wildcard symbol (*) during monitoring and incident response to detect any custom modules used by potential threat actors.</p>
+</li>
+</ol>
+<h2 id="powershell-related-log-review">PowerShell-Related Log Review<a class="headerlink" href="#powershell-related-log-review" title="Permanent link">&para;</a></h2>
+<h3 id="recommended_2">Recommended:<a class="headerlink" href="#recommended_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Review PowerShell-Related Logs</strong>: After enabling PowerShell logging, regularly review the following logs for PowerShell events:</li>
+<li>Windows PowerShell.evtx</li>
+<li>Microsoft-Windows-PowerShell/Operational.evtx</li>
+<li>Microsoft-Windows-PowerShell/Analytic.etl (disabled by default)</li>
+<li>Microsoft-Windows-WinRM/Operational.evtx</li>
+<li>Microsoft-Windows-WinRM/Analytic.etl (disabled by default)</li>
+<li>PowerShellCore/Operational</li>
+<li>PowerShellCore/Analytical</li>
+</ol>
+<h2 id="command-line-audit-logging">Command-Line Audit Logging<a class="headerlink" href="#command-line-audit-logging" title="Permanent link">&para;</a></h2>
+<h3 id="optional">Optional:<a class="headerlink" href="#optional" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Enable Command-Line Audit Logs</strong>: Optionally, consider enabling command-line audit logs to capture command-line arguments used in security events.</li>
+</ol>
+<h3 id="configuration-details">Configuration Details:<a class="headerlink" href="#configuration-details" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Configure GPO for Process Creation</strong>: Set the 'Include command line in process creation events' GPO to enabled to determine what information is logged in security audit events for new process creation.</p>
+</li>
+<li>
+<p><strong>Set Audit Process Creation Options</strong>: Configure the 'Audit Process Creation' setting to enable Success and/or Failure events based on your organization's requirements.</p>
+</li>
+</ol>
+<h2 id="log-tuning-and-centralization">Log Tuning and Centralization<a class="headerlink" href="#log-tuning-and-centralization" title="Permanent link">&para;</a></h2>
+<h3 id="recommended_3">Recommended:<a class="headerlink" href="#recommended_3" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Tune Log Volume</strong>: Properly configure log settings to balance capturing critical details without generating excessive events that could lead to log alert fatigue or reduced storage capacity.</p>
+</li>
+<li>
+<p><strong>Centralize Logs</strong>: If possible, store logs in a centralized location off the local system to enhance security and prevent local user access to event logs.</p>
+</li>
+<li>
+<p><strong>Deny Local User Access</strong>: As an alternative mitigation, deny local user access to event logs if log centralization is not feasible.</p>
+</li>
+</ol>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<p>CERT-EU: PowerShell—Cybersecurity
+Perspective
+ https://media.cert.europa.eu/static/WhitePapers/CERT-EU-SWP2019-001.pdf
+CIS Benchmarks https://www.cisecurity.org/cis-benchmarks/
+CIS Community Defense Model 2.0 https://www.cisecurity.org/white-papers/cis-community-defense-model-2-0/
+CIS Controls https://www.cisecurity.org/controls/
+CIS Controls v7.1 Exploited Protocols:
+Remote Desktop Protocol (RDP)
+ https://www.cisecurity.org/white-papers/exploited-protocols-remote-desktop-protocol-rdp/
+CIS Controls v8 Exploited Protocols:
+Server Message Block (SMB)
+ https://www.cisecurity.org/white-papers/cis-controls-v8-exploited-protocols-server-message-block-smb/
+CIS Controls v8 Commonly Exploited
+Protocols: Windows Management
+Instrumentation (WMI)
+ https://www.cisecurity.org/insights/white-papers/cis-controls-commonly-exploited-protocols-windows-
+management-instrumentation
+Globe News Wire https://www.globenewswire.com/news-release/2016/04/12/828009/26208/en/Carbon-Black-United-Threat-
+Research-Report-Reveals-How-Cyber-Attackers-Exploit-Microsoft-PowerShell-to-Launch-Attacks.html
+PowerShell on GitHub https://github.com/PowerShell/PowerShell
+Microsoft PowerShell Documentation https://docs.microsoft.com/en-us/powershell/
+Microsoft PowerShell Team https://devblogs.microsoft.com/powershell/
+Microsoft Antimalware Scan
+Interface (AMSI)
+ https://docs.microsoft.com/en-us/windows/win32/amsi/antimalware-scan-interface-portal
+MITRE ATT&amp;CK® Framework v8.2 https://attack.mitre.org/versions/v8/matrices/enterprise/</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.tabs", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1c3ead8.min.js"></script>
+      
+    
+  </body>
+</html>
