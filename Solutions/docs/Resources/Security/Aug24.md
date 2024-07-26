@@ -39,5 +39,4 @@ potential impact on public opinion. They argue that these operations have
 the potential to undermine democratic institutions, sow division, and
 create confusion, making it challenging for people to distinguish between
 fact and fiction.
-
-(watch the video)[https://www.disinfo.eu/outreach/our-webinars/11-july-false-facade-and-copycop-two-names-for-a-new-russian-influence-operation/]
+[watch the video](https://www.disinfo.eu/outreach/our-webinars/11-july-false-facade-and-copycop-two-names-for-a-new-russian-influence-operation/)
